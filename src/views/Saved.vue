@@ -2,23 +2,27 @@
   <div>
     <h1>Saved</h1>
     <pre>
-      {{ stateParks }}
+      {{ savedParks }}
     </pre>
+    <ul>
+       <li v-for="park in savedParks" v-bind:key="park.id">
+         <a :href="park.url">{{ park.name }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
+
 export default {
   name: "saved",
   computed: {
     ...mapState([
-      //change to saved when that logic is wired up:
-      'stateParks'
+      'savedParks'
     ])
   }
 }
 </script>
 <style lang="sass">
-
 </style>
 

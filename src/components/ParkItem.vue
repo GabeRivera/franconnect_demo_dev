@@ -3,10 +3,13 @@
     <h2>{{ park.fullname }}</h2>
     <p>{{ park.designation }}</p>
     <p>{{ park.description | truncate }}</p>
+    <button @click.prevent="savePark">Save Me</button>
     <router-link :to="{ name: 'park', params: { parkcode: park.parkcode }}">Learn More</router-link>
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: 'park-item',
   props: ['park'],
@@ -16,6 +19,14 @@ export default {
         value = value.substring(0, 55) + '...';
       }
       return value;
+    }
+  },
+  methods: {
+    ...mapActions([
+      "SAVE_PARK_ACTION"
+    ]),
+    savePark() {
+      this.SAVE_PARK_ACTION(this.park);
     }
   }
 }
