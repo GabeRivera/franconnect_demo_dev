@@ -1,7 +1,7 @@
 <template>
   <div class="park-page">
-     <pre>{{ park }}</pre>
-     <div class="park-info">
+     <div v-if="loading">Fetching park data</div>
+     <div class="park-info" v-if="!loading">
        <h1>{{ park.fullname }}</h1>
        <p>{{ park.description }}</p>
 
@@ -13,9 +13,10 @@
        <p><a :href="park.directionsurl">Directions</a></p>
      </div>
      <div class="park-alerts">
-       <h1>Alerts for {{ park.name }}</h1>
+       <h1 v-if="!loading">Alerts for {{ park.name }}</h1>
        <div v-for="alert in alerts" v-bind:key="alert.id">
-         <p>{{ alert.title }}</p>
+         <h4>{{ alert.title }}</h4>
+         <p>{{ alert.category }}</p>
          <p>{{ alert.description }}</p>
          <a :href="alert.url">Learn More</a>
       </div>
@@ -27,6 +28,7 @@ export default {
   name: 'park',
   data() {
     return {
+      loading: true,
       park: null,
       alerts: null
     };
@@ -39,11 +41,12 @@ export default {
       .then(response => response.json())
       .then(response => {
         this.park = response.data[0];
+        this.loading = false;
       });
     fetch(`${apiurl}/alerts?parkCode=${this.$route.params.parkcode}&api_key=${apiKey}`)
       .then(response => response.json())
       .then(response => {
-        this.alerts = response.data[0];
+        this.alerts = response.data;
     });
   }
 }
