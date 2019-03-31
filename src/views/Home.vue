@@ -12,9 +12,9 @@
     <button @click="showLocationForm">Begin!</button>
     <parks-form-location v-if="formLocationShown" v-on:locationDone="showDesignationForm"></parks-form-location>
     <parks-form-designation v-if="formDesignationShown" v-on:designationDone="showParks"></parks-form-designation>
-    <pre>{{ parks }}</pre>
-    <div class="parks">
-      <park-item v-if="parks != null" v-for="park in parks" :park="park"></park-item>
+
+    <div class="parks" v-if="parks != null">
+      <park-item v-bind:key="park.id" v-for="park in parks" :park="park"></park-item>
     </div>
   </div>
 </template>
