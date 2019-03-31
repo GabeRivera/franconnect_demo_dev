@@ -7,7 +7,7 @@
         <input type="submit" style="display: none;"/>
         <select v-model="designation">
           <option value="null">Select a Designation</option>
-          <option value="none">Not Designated</option>
+          <option value="all">All</option>
           <option value="National Park">National Park</option>
           <option value="National Monument">National Monument</option>
           <option value="National Preserve">National Preserve</option>
@@ -24,6 +24,7 @@
           <option value="National Trail">National Trail</option>
           <option value="Affiliated Areas">Affiliated Areas</option>
         </select>
+        <input type="submit" value="Go" />
       </form>
   </div>
 </template>
@@ -47,8 +48,9 @@ export default {
   methods: {
     submitDesignation() {
       const parksByDesignation = this.GET_PARK_BY_DESIGNATION(this.designation);
+      console.log(parksByDesignation);
       this.displayForm = false;
-      this.$emit('designationDone', parksByDesignation);;
+      this.$emit('designationDone', parksByDesignation);
     }
   }
 };

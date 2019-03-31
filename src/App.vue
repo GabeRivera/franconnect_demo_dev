@@ -2,8 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <router-link to="/saved">Saved</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link to="saved">Saved</router-link>
+      <router-link to="about">About</router-link>
     </div>
     <router-view />
   </div>
@@ -19,6 +19,10 @@
 }
 #nav {
   padding: 30px;
+  max-width: 1200px;
+  justify-content: space-between;
+  display: flex;
+  margin: 0 auto;
   a {
     font-weight: bold;
     color: #2c3e50;

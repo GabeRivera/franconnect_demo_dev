@@ -13,8 +13,11 @@ export default new Vuex.Store({
   },
   getters: {
     GET_PARK_BY_DESIGNATION: (state) => (designation) => {
+      if (designation === 'all') {
+        return state.stateParks[state.currState];
+      }
       return state.stateParks[state.currState].filter(park => {
-       return park.designation.includes(`${designation}`);
+        return park.designation.includes(`${designation}`);
       });
     }
   },
@@ -39,6 +42,10 @@ export default new Vuex.Store({
       if (found === -1) {
         state.savedParks.push(payload);
       }
+    },
+    REMOVE_PARK(state, payload) {
+      const found = state.savedParks.findIndex((park) => park.id == payload);
+      state.savedParks.splice(found, 1);
     }
   },
   actions: {
@@ -61,6 +68,9 @@ export default new Vuex.Store({
     },
     SAVE_PARK_ACTION(context, park) {
       context.commit("SAVE_PARK", park);
+    },
+    REMOVE_PARK_ACTION(context, park) {
+      context.commit("REMOVE_PARK", park);
     }
   }
 });

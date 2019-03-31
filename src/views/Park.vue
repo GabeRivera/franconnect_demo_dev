@@ -14,7 +14,7 @@
      </div>
      <div class="park-alerts">
        <h1 v-if="!loading">Alerts for {{ park.name }}</h1>
-       <div v-for="alert in alerts" v-bind:key="alert.id">
+       <div class="alert" v-for="alert in alerts" v-bind:key="alert.id">
          <h4>{{ alert.title }}</h4>
          <p>{{ alert.category }}</p>
          <p>{{ alert.description }}</p>
@@ -51,3 +51,12 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+.park-page {display: flex; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;}
+.park-info { flex: 4; min-width: 600px; font-size: 18px; text-align: left;}
+.park-info p {max-width: 70ch;line-height: 150%; margin-bottom: .5rem;}
+.label {font-weight: bold;}
+.park-alerts { flex: 2; min-width: 325px;}
+.alert { max-width: 300px; margin: 0 auto; border: solid 1px #ccc; padding: 1rem 2rem; margin-bottom: 2rem; border-radius: 10px;}
+</style>
+

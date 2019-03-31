@@ -9,7 +9,7 @@
     <p>
       Let us help you find the park that fits your needs
     </p>
-    <button @click="showLocationForm">Begin!</button>
+    <button class="begin" @click="showLocationForm">Begin!</button>
     <parks-form-location v-if="formLocationShown" v-on:locationDone="showDesignationForm"></parks-form-location>
     <parks-form-designation v-if="formDesignationShown" v-on:designationDone="showParks"></parks-form-designation>
 
@@ -54,5 +54,5 @@ export default {
 </script>
 <style lang="sass">
 .parks { display: flex; flex-wrap: wrap;}
-
+.begin {background-color: #42b983; color: #fff; font-size: 1.5rem; padding: .5rem 1rem; border-radius: 5px;}
 </style>

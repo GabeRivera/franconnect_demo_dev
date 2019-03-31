@@ -4,7 +4,6 @@
       <span class="loader" v-if="loading">checking...</span>
       <p class="selected-state" v-if="!displayForm">{{ state }}</p>
       <form @submit.prevent="submitLocation" v-if="displayForm">
-        <input type="submit" style="display: none;"/>
         <select v-model="state">
           <option value="null">Choose a State</option>
           <option value="AL">Alabama</option>
@@ -59,6 +58,7 @@
           <option value="WI">Wisconsin</option>
           <option value="WY">Wyoming</option>
         </select>
+        <input type="submit" value="Go">
       </form>
   </div>
 </template>
