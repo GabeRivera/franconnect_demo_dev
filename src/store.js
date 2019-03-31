@@ -10,7 +10,13 @@ export default new Vuex.Store({
     savedParks: [],
     stateParks: []
   },
-  getters: {},
+  getters: {
+    GET_PARK_BY_DESIGNATION: (state) => (designation) => {
+      return state.stateParks.filter(park => {
+       return park.designation.includes(`${designation}`);
+      });
+    }
+  },
   mutations: {
     SET_STATE_PARKS(state, payload) {
       state.stateParks = payload;

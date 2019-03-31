@@ -11,12 +11,17 @@
     </p>
     <button @click="showLocationForm">Begin!</button>
     <parks-form-location v-if="formLocationShown" v-on:locationDone="showDesignationForm"></parks-form-location>
-     <parks-form-designation v-if="formDesignationShown"></parks-form-designation>
+    <parks-form-designation v-if="formDesignationShown" v-on:designationDone="showParks"></parks-form-designation>
+    <pre>{{ parks }}</pre>
+    <div class="parks">
+      <park-item v-if="parks != null" v-for="park in parks" :park="park"></park-item>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src/
+import ParkItem from "@/components/ParkItem.vue";
 import ParksFormLocation from "@/components/ParksFormLocation.vue";
 import ParksFormDesignation from "@/components/ParksFormDesignation.vue";
 
@@ -24,12 +29,14 @@ export default {
   name: "home",
   components: {
     "parks-form-location": ParksFormLocation,
-    "parks-form-designation": ParksFormDesignation
+    "parks-form-designation": ParksFormDesignation,
+    "park-item": ParkItem
   },
   data() {
     return {
       formLocationShown: false,
-      formDesignationShown: false
+      formDesignationShown: false,
+      parks: null
     };
   },
   methods: {
@@ -39,6 +46,9 @@ export default {
     showDesignationForm() {
       this.formLocationShown = false;
       this.formDesignationShown = true;
+    },
+    showParks(event) {
+      this.parks = event;
     }
   }
 };

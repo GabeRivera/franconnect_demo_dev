@@ -2,9 +2,9 @@
   <div>
       <p>What kind of park would you like to visit? </p>
       <span class="loader" v-if="loading">Looking for a park with your specified designation...</span>
-      <form @submit.prevent="submitLocation">
+      <form @submit.prevent="submitDesignation">
         <input type="submit" style="display: none;"/>
-        <select v-model="activity">
+        <select v-model="designation">
           <option value="null">Select a Designation</option>
           <option value="none">Not Designated</option>
           <option value="National Park">National Park</option>
@@ -27,16 +27,26 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "parks-form-designation",
   data() {
     return {
-      activity: null,
+      designation: null,
       loading: false,
     };
   },
-  methods: {}
+  computed: {
+    ...mapGetters([
+      'GET_PARK_BY_DESIGNATION'
+    ])
+  },
+  methods: {
+    submitDesignation() {
+      const parksByDesignation = this.GET_PARK_BY_DESIGNATION(this.designation);
+      this.$emit('designationDone', parksByDesignation);;
+    }
+  }
 };
 </script>
