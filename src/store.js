@@ -28,7 +28,6 @@ export default new Vuex.Store({
         fetch(`${apiurl}/parks?stateCode=${state_code}&api_key=${apiKey}`)
           .then(response => response.json())
           .then(response => {
-            console.log(response);
             context.commit("SET_STATE_PARKS", response.data);
             resolve(true);
           })

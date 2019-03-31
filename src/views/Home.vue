@@ -44,7 +44,6 @@ export default {
       this.formLocationShown = true;
     },
     showDesignationForm() {
-      this.formLocationShown = false;
       this.formDesignationShown = true;
     },
     showParks(event) {
@@ -53,3 +52,7 @@ export default {
   }
 };
 </script>
+<style lang="sass">
+.parks { display: flex; flex-wrap: wrap;}
+
+</style>

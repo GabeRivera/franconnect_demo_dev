@@ -20,3 +20,7 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+.park-item {flex: 1; min-width: 320px; }
+</style>
+

@@ -2,7 +2,8 @@
   <div>
       <p>What state do you live in? </p>
       <span class="loader" v-if="loading">checking...</span>
-      <form @submit.prevent="submitLocation">
+      <p class="selected-state" v-if="!displayForm">{{ state }}</p>
+      <form @submit.prevent="submitLocation" v-if="displayForm">
         <input type="submit" style="display: none;"/>
         <select v-model="state">
           <option value="null">Choose a State</option>
@@ -70,6 +71,7 @@ export default {
     return {
       state: null,
       loading: false,
+      displayForm: true
     };
   },
   methods: {
@@ -81,6 +83,7 @@ export default {
       this.GET_STATE_PARKS(this.state).then(
         () => {
           this.loading = false;
+          this.displayForm = false;
           this.$emit('locationDone');
         }
       );

@@ -2,7 +2,8 @@
   <div>
       <p>What kind of park would you like to visit? </p>
       <span class="loader" v-if="loading">Looking for a park with your specified designation...</span>
-      <form @submit.prevent="submitDesignation">
+       <p class="selected-designation" v-if="!displayForm">{{ designation }}</p>
+      <form v-if="displayForm" @submit.prevent="submitDesignation">
         <input type="submit" style="display: none;"/>
         <select v-model="designation">
           <option value="null">Select a Designation</option>
@@ -35,6 +36,7 @@ export default {
     return {
       designation: null,
       loading: false,
+      displayForm: true
     };
   },
   computed: {
@@ -45,6 +47,7 @@ export default {
   methods: {
     submitDesignation() {
       const parksByDesignation = this.GET_PARK_BY_DESIGNATION(this.designation);
+      this.displayForm = false;
       this.$emit('designationDone', parksByDesignation);;
     }
   }
